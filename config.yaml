@@ -1,0 +1,18 @@
+mysql:
+  user : root
+  password :
+  host : 127.0.0.1
+  port : 3306
+  name : test
+logfile:
+  filename: Logs.sql
+export:
+  tableName: Logs
+  exportSQL: SELECT * FROM Logs
+  exportOpenPaging: true
+  exportPagingStart: 0
+  exportPagingEnd: 400
+  exportPagingLimit: 20000
+
+
+
