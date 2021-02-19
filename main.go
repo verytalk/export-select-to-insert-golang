@@ -6,13 +6,8 @@ import (
 	"golaer/util"
 	"log"
 	"strconv"
-	"strings"
 )
 
-func replaceStr(str string) string{
-	str = strings.Replace(str, "'","\\'",-1)
-	return str
-}
 
 func foreachData(result []map[string]string, columns []string){
 
@@ -33,7 +28,7 @@ func foreachData(result []map[string]string, columns []string){
 		for _, k := range columns {
 			i++
 			exportColumns += k
-			values += "'"+replaceStr(r[k])+"'"
+			values += "'"+ util.ReplaceSQLStr(r[k])+"'"
 			if dataLength != i {
 				exportColumns += ","
 				values += ","
@@ -41,7 +36,6 @@ func foreachData(result []map[string]string, columns []string){
 		}
 		exportColumns += ")"
 		values += ")"
-
 		exportTable:= util.Config.Export.TableName
 		sql = "INSERT "+exportTable+" " + exportColumns + " VALUES " + values + "; \n"
 		//fmt.Print(sql)
@@ -66,7 +60,7 @@ func task() {
 	//fmt.Println(util.Config.Crontab.Period)
 	//util.Run()
 	exportSQL:= util.Config.Export.ExportSQL
-	exportOpenPaging:= util.Config.Export.ExportOpenPaging;
+	exportOpenPaging:= util.Config.Export.ExportOpenPaging
 
 	if exportOpenPaging {
 		exportPagingEnd:= util.Config.Export.ExportPagingEnd
@@ -86,9 +80,7 @@ func task() {
 	}else{
 		getData(exportSQL)
 	}
-
 	log.Println("export done please check logfile " + util.Config.LogFile.FileName)
-
 }
 
 

@@ -43,13 +43,13 @@ func RunSelect(mSql string) ([]map[string]string,[]string ){
 	var result []map[string]string
 	for rows.Next() {
 		res := make(map[string]string)
-		rows.Scan(scanArgs...)
+		_ = rows.Scan(scanArgs...)
 		for i, col := range values {
 			res[columns[i]] = string(col)
 		}
 		result = append(result, res)
 	}
-	rows.Close()
+	_ = rows.Close()
 
 	return result,columns
 }

@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-var ConfigFile string;
+var ConfigFile string
 var Config = new(module.Yaml)
 
 func InitConfig() {
